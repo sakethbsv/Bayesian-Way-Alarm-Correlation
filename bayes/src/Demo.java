@@ -11,7 +11,6 @@
  */
 
 import java.util.ArrayList;
-
 import norsys.netica.*;
 import norsys.neticaEx.aliases.Node;
      
@@ -56,6 +55,7 @@ public class Demo {
 		
 		//ML2.addLink (ML1);
 		//xRay.addLink (ML2);
+		Node MLinks[] = {ML2, ML3}; 
 
 		float[] BSCProbs = { 0.99F, 0.01F };
 		int[] aBSCParentStates = null;
@@ -64,42 +64,40 @@ public class Demo {
 		ML1.setCPTable ("Normal", 0.5,   0.5);
 		ML1.setCPTable ("Fault", 0.5, 0.5);
 		
-		ML2.setCPTable ("Normal", 0.5,   0.5);
-		ML2.setCPTable ("Alarm", 0.5,  0.5);
 		
-		ML3.setCPTable ("Normal", 0.5,   0.5);
-		ML3.setCPTable ("Alarm", 0.5,  0.5);
-		//ML1.setCPTable ("Alarm", 0.9,  0.1);
+		for(Node ml : MLinks){
+			
+			ml.setCPTable ("Normal", 0.5,   0.5);
+			ml.setCPTable ("Alarm", 0.5, 0.5);
+			
+		}
+		
+		Node BTSArr[] = {BTS1, BTS2, BTS3}; 
+
+		for(Node BTS : BTSArr){
 		
 		int[] aparentStates =  new int[2];
 	    aparentStates[0] = 0;
 	    aparentStates[1] = 0;
 	    float[] aprobsRow1 = {0.95F, 0.05F};
-	    BTS1.setCPTable (aparentStates, aprobsRow1);
-	    BTS2.setCPTable (aparentStates, aprobsRow1);
-	    BTS3.setCPTable (aparentStates, aprobsRow1);
+	    BTS.setCPTable (aparentStates, aprobsRow1);
 	    
 	    aparentStates[0] = 0;
 	    aparentStates[1] = 1;
 	    float[] aprobsRow2 = {0.05F, 0.95F};
-	    BTS1.setCPTable (aparentStates, aprobsRow2);
-	    BTS2.setCPTable (aparentStates, aprobsRow2);
-	    BTS3.setCPTable (aparentStates, aprobsRow2);
-		     
+	    BTS.setCPTable (aparentStates, aprobsRow2);
+	         
 	    aparentStates[0] = 1;
 	    aparentStates[1] = 0;
 	    float[] aprobsRow4 = {0.05F, 0.95F};
-	    BTS1.setCPTable (aparentStates, aprobsRow4);
-	    BTS2.setCPTable (aparentStates, aprobsRow4);
-	    BTS3.setCPTable (aparentStates, aprobsRow4);
+	    BTS.setCPTable (aparentStates, aprobsRow4);
 	    
 	    aparentStates[0] = 1;
 	    aparentStates[1] = 1;
 	    float[] aprobsRow5 = {0.05F, 0.95F};
-	    BTS1.setCPTable (aparentStates, aprobsRow5);
-	    BTS2.setCPTable (aparentStates, aprobsRow5);
-	    BTS3.setCPTable (aparentStates, aprobsRow5);
-
+	    BTS.setCPTable (aparentStates, aprobsRow5);
+	    
+		}
 		
 	    net.compile();
 
